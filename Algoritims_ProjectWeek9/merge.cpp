@@ -1,65 +1,80 @@
 #include <iostream>
-#include "merge.h"
 using namespace std;
 
-void Merge(int numbers[], int i, int j, int k) {
-    int mergedSize = k - i + 1;             // Size of merged partition
-    int mergePos = 0;                     // Position to insert merged number
-    int leftPos = 0;                      // Position of elements in left partition
-    int rightPos = 0;                      // Position of elements in right partition
-    int* mergedNumbers = new int[mergedSize];   // Dynamically allocates temporary array
-                                              // for merged numbers
+void merge(int arr[], int l, int m, int r)
+{
+    
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
 
-    leftPos = i;                           // Initialize left partition position
-    rightPos = j + 1;                   // Initialize right partition position
+    /* create temp arrays */
+    int* L = new int[n1];
+    int* R = new int[n2];
 
-        // Add smallest element from left or right partition to merged numbers
-        while (leftPos <= j && rightPos <= k) {
-            if (numbers[leftPos] <= numbers[rightPos]) {
-                mergedNumbers[mergePos] = numbers[leftPos];
-                ++leftPos;
-            }
-            else {
-                mergedNumbers[mergePos] = numbers[rightPos];
-                ++rightPos;
+    /* Copy data to temp arrays L[] and R[] */
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
 
-            }
-            ++mergePos;
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+
+    /* Merge the temp arrays back into arr[l..r]*/
+    i = 0; // Initial index of first subarray 
+    j = 0; // Initial index of second subarray 
+    k = l; // Initial index of merged subarray 
+    while (i < n1 && j < n2)
+    {
+        if (L[i] <= R[j])
+        {
+            arr[k] = L[i];
+            i++;
         }
-
-    // If left partition is not empty, add remaining elements to merged numbers
-    while (leftPos <= j) {
-        mergedNumbers[mergePos] = numbers[leftPos];
-        ++leftPos;
-        ++mergePos;
+        else
+        {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
     }
 
-    // If right partition is not empty, add remaining elements to merged numbers
-    while (rightPos <= k) {
-        mergedNumbers[mergePos] = numbers[rightPos];
-        ++rightPos;
-        ++mergePos;
+    /* Copy the remaining elements of L[], if there
+       are any */
+    while (i < n1)
+    {
+        arr[k] = L[i];
+        i++;
+        k++;
     }
+    delete[]L;
 
-    // Copy merge number back to numbers
-    for (mergePos = 0; mergePos < mergedSize; ++mergePos) {
-        numbers[i + mergePos] = mergedNumbers[mergePos];
+
+    /* Copy the remaining elements of R[], if there
+       are any */
+    while (j < n2)
+    {
+        arr[k] = R[j];
+        j++;
+        k++;
     }
-
-    delete []mergedNumbers;
+    delete[]R;
+    
 }
 
-void MergeSort(int numbers[], int i, int k) {
-    int j = 0;
+/* l is for left index and r is right index of the
+   sub-array of arr to be sorted */
+void mergeSort(int arr[], int l, int r)
+{
+    if (l < r)
+    {
+        // Same as (l+r)/2, but avoids overflow for 
+        // large l and h 
+        int m = l + (r - l) / 2;
 
-        if (i < k) {
-            j = (i + k) / 2;  // Find the midpoint in the partition
+        // Sort first and second halves 
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
 
-            // Recursively sort left and right partitions
-            MergeSort(numbers, i, j);
-            MergeSort(numbers, j + 1, k);
-
-                // Merge left and right partition in sorted order
-            Merge(numbers, i, j, k);
-        }
+        merge(arr, l, m, r);
+    }
 }
