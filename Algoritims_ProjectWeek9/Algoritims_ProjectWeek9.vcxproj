@@ -139,7 +139,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Algoritims_ProjectWeek9.cpp" />
+    <ClCompile Include="bubblesort.cpp" />
+    <ClCompile Include="heapsort.cpp" />
+    <ClCompile Include="insertionsort.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="merge.cpp" />
+    <ClCompile Include="quicksort.cpp" />
+    <ClCompile Include="selection.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bubblesort.h" />
+    <ClInclude Include="heapsort.h" />
+    <ClInclude Include="insertionsort.h" />
+    <ClInclude Include="merge.h" />
+    <ClInclude Include="quicksort.h" />
+    <ClInclude Include="selection.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
