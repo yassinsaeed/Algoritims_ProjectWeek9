@@ -63,7 +63,7 @@ void merge(int arr[], int l, int m, int r)
 
 /* l is for left index and r is right index of the
    sub-array of arr to be sorted */
-void mergeSort(int arr[], int l, int r)
+void MergeSort(int arr[], int l, int r)
 {
     if (l < r)
     {
@@ -72,8 +72,8 @@ void mergeSort(int arr[], int l, int r)
         int m = l + (r - l) / 2;
 
         // Sort first and second halves 
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
+        MergeSort(arr, l, m);
+        MergeSort(arr, m + 1, r);
 
         merge(arr, l, m, r);
     }

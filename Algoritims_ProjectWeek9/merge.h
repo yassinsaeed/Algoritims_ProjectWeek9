@@ -1,3 +1,4 @@
 #pragma once
 
-void MergeSort(int numbers[], int i, int k);
+void merge(int arr[], int l, int m, int r);
+void MergeSort(int arr[], int l, int r);
