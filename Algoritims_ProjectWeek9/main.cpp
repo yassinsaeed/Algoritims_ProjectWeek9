@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <time.h>
+#include <string>
+#include <iomanip>
 #include "quicksort.h"
 #include "bubblesort.h"
 #include "selection.h"
@@ -33,11 +35,12 @@ void firstFifty(int array[]) {
 int main()
 {
 	//empty 10000 size array
-
 	const int numberSize = 10000;
 	int numbers[numberSize];
 	int savedNumbers[numberSize];
 	randomize(numbers, numberSize);
+	clock_t start, end;
+	double time_taken;
 	bool yes = true;
 	do {
 		system("cls");
@@ -58,16 +61,38 @@ int main()
 		case 1:
 			cout << "Selection" << endl;
 			saveArray(numbers, savedNumbers, numberSize); // save array before sorted
+
+			start = clock();
 			SelectionSort(numbers, numberSize);
+			end = clock();
+
 			firstFifty(numbers); // print the first 50
+
+			time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+			cout << "Time taken by selection sort algorithm is : " << fixed
+				<< time_taken << setprecision(5);
+			cout << " sec " << endl;
+
 			saveArray(savedNumbers, numbers, numberSize); // revert array back to original state
 			system("Pause");
 			break;
 		case 2:
 			cout << "insertion" << endl;
 			saveArray(numbers, savedNumbers, numberSize); // save array before sorted
+
+			start = clock();
+
 			InsertionSort(numbers, numberSize);
+
+			end = clock();
+			
 			firstFifty(numbers); // print the first 50
+
+			time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+			cout << "Time taken by insertion sort algorithm is : " << fixed
+				<< time_taken << setprecision(5);
+			cout << " sec " << endl;
+
 			saveArray(savedNumbers, numbers, numberSize); // revert array back to original state
 			system("Pause");
 
@@ -75,8 +100,18 @@ int main()
 		case 3:
 			cout << "bubble" << endl;
 			saveArray(numbers, savedNumbers, numberSize); // save array before sorted
+
+			start = clock();
 			BubbleSort(numbers, numberSize);
+			end = clock();
+
 			firstFifty(numbers); // print the first 50
+
+			time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+			cout << "Time taken by bubble sort algorithm is : " << fixed
+				<< time_taken << setprecision(5);
+			cout << " sec " << endl;
+
 			saveArray(savedNumbers, numbers, numberSize); // revert array back to original state
 			system("Pause");
 
@@ -84,8 +119,18 @@ int main()
 		case 4:
 			cout << "merge" << endl;
 			saveArray(numbers, savedNumbers, numberSize); // save array before sorted
+
+			start = clock();
 			MergeSort(numbers, 0, numberSize-1);
+			end = clock();
+
 			firstFifty(numbers); // print the first 50
+
+			time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+			cout << "Time taken by merge sort algorithm is : " << fixed
+				<< time_taken << setprecision(5);
+			cout << " sec " << endl;
+
 			saveArray(savedNumbers, numbers, numberSize); // revert array back to original state
 			system("Pause");
 
@@ -93,8 +138,18 @@ int main()
 		case 5:
 			cout << "quick" << endl;
 			saveArray(numbers, savedNumbers, numberSize); // save array before sorted
+
+			start = clock();
 			quickSort(numbers, 0, numberSize - 1);
+			end = clock();
+
 			firstFifty(numbers); // print the first 50
+
+			time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+			cout << "Time taken by quick sort algorithm is : " << fixed
+				<< time_taken << setprecision(5);
+			cout << " sec " << endl;
+
 			saveArray(savedNumbers, numbers, numberSize); // revert array back to original state
 			system("Pause");
 
@@ -102,8 +157,18 @@ int main()
 		case 6:
 			cout << "heap" << endl;
 			saveArray(numbers, savedNumbers, numberSize); // save array before sorted
+
+			start = clock();
 			Heapsort(numbers, numberSize);
+			end = clock();
+
 			firstFifty(numbers); // print the first 50
+
+			time_taken = double(end - start) / double(CLOCKS_PER_SEC);
+			cout << "Time taken by program is : " << fixed
+				<< time_taken << setprecision(5);
+			cout << " sec " << endl;
+
 			saveArray(savedNumbers, numbers, numberSize); // revert array back to original state
 			system("Pause");
 
